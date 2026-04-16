@@ -1,0 +1,32 @@
+{
+  "slug": "bramble",
+  "title": "BRAMBLE",
+  "meta": "Countryside \u00b7 Brecon Beacons",
+  "introTitle": "Welcome to Bramble",
+  "introText": "Sitting along the hedgerow, Bramble offers stunning views of the mountain range. A luxurious glamping cabin with mountain views, it's bright, beautiful and brimming with style. New for 2026, we have integrated the kitchenette into the cabin, so no need to leave the cosy space for your morning coffee.",
+  "storyTitle": "Bright, beautiful and brimming with style",
+  "storyText": "Bramble is a hand-crafted wooden yurt built by a local craftsman using locally sourced materials. Off-grid and self-contained, it offers a sumptuous king-size bed, toasty wood burner, and a private sundeck with open views extending to the Black Mountains. Whether you're after a romantic retreat or a getaway with the little one, Bramble is the perfect place to slow down and switch off.",
+  "heroImage": "assets/images/Bramble/Bramble Cover.jpeg",
+  "gallery": [
+    "assets/images/Bramble/Bramble Cover.jpeg",
+    "assets/images/Bramble/Bramble-cabin-at-Wye-Glamping-is-perfect-for-a-family-glamping-holiday-in-Wales.jpg",
+    "assets/images/Bramble/Bramble-cabin-is-perfect-for-family-glamping-in-Wales (1).jpg",
+    "assets/images/Bramble/Bramble-cabin-provides-the-perfect-family-glamping-holiday-in-Wales.jpg",
+    "assets/images/Bramble/Bramble-cabin-provides-the-perfect-glamping-holiday-for-couples-in-Wales-at-Wye-Glamping.jpg",
+    "assets/images/Bramble/Inside-the-beautiful-Bramble-cabin-at-Wye-Glamping-for-couples-with-dogs-in-Wales.jpg",
+    "assets/images/Bramble/Inside-the-gorgeous-Bramble-cabin-at-Wye-Glamping-in-Wales-for-families.jpg",
+    "assets/images/Bramble/The-toasty-woodburner-inside-Bramble-cabin-at-Wye-Glamping-in-Wales-for-couples.jpg",
+    "assets/images/Bramble/View-from-Bramble-cabin-at-Wye-Glamping-family-holidays-in-Wales (1).jpg"
+  ],
+  "specs": [
+    { "icon": "sleeps", "label": "Sleeps 2 (Cot Available)" },
+    { "icon": "bed", "label": "King Bed" },
+    { "icon": "flame", "label": "Wood Burner" },
+    { "icon": "solar", "label": "Off-Grid & Solar" },
+    { "icon": "kitchen", "label": "Integrated Kitchenette" },
+    { "icon": "firepit", "label": "Fire Pit & BBQ" },
+    { "icon": "mountain", "label": "Mountain Views" },
+    { "icon": "shower", "label": "Luxury Shower" }
+  ],
+  "mapQuery": "Felindre, Brecon, Powys"
+}

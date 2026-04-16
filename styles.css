@@ -1,17 +1,43 @@
+/* ══════════════════════════════════════════════════════════
+   THEME — Change these variables to restyle the whole site.
+   Colours, fonts, spacing all live here for easy tweaking.
+   ══════════════════════════════════════════════════════════ */
 :root {
-  --bg: #f2f2f2;
-  --footer-bg: #ececec;
-  --ink: #161616;
-  --line: #d6d6d6;
+  /* ── Colours (Sage & Linen) ── */
+  --bg: #e8e4d4;
+  --bg-alt: #d8d2be;
+  --ink: #2a2e24;
+  --ink-muted: #6b7060;
+  --accent: #5a7050;
+  --accent-hover: #4a6040;
+  --accent-light: #d0d8c8;
+  --line: #c0b8a4;
+  --footer-bg: #d4ceb8;
+  --card-bg: #f2efe4;
+
+  /* ── Layout ── */
   --max: 1340px;
   --content: 1120px;
   --header-height: 122px;
-  --heading-font: "Libre Baskerville", Georgia, "Times New Roman", serif;
-  --body-font: "Work Sans", "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* ── Tunables ── */
+  --btn-radius: 0px;
+  --card-radius: 0px;
+  --heading-weight: 700;
+  --nav-spacing: 0.22em;
+  --body-size: 19px;
+
+  /* ── Fonts ── */
+  --heading-font: "Raleway", "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --body-font: "Raleway", "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
@@ -54,7 +80,7 @@ a {
 /* ── Focus Styles ── */
 
 *:focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -134,13 +160,18 @@ a {
   text-decoration: none;
   text-transform: uppercase;
   font-size: 11px;
-  letter-spacing: 0.26em;
+  letter-spacing: var(--nav-spacing);
   font-weight: 600;
+}
+
+.main-nav a:hover {
+  color: var(--accent);
 }
 
 .main-nav a.is-active {
   text-decoration: underline;
   text-underline-offset: 4px;
+  color: var(--accent);
 }
 
 .header-actions {
@@ -154,9 +185,16 @@ a {
   text-decoration: none;
   border: 1.5px solid var(--ink);
   padding: 9px 20px;
+  border-radius: var(--btn-radius);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.2em;
+  transition: background 0.2s, color 0.2s;
+}
+
+.contact-btn:hover {
+  background: var(--ink);
+  color: var(--bg);
 }
 
 .icon-link {
@@ -174,6 +212,10 @@ a {
   fill: none;
   stroke: var(--ink);
   stroke-width: 1.8;
+}
+
+.icon-link:hover svg {
+  stroke: var(--accent);
 }
 
 [data-page="stay"] .logo,
@@ -238,17 +280,17 @@ a {
   text-align: center;
   font-family: var(--heading-font);
   font-size: clamp(34px, 3.2vw, 56px);
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  font-weight: var(--heading-weight);
+  letter-spacing: -0.01em;
 }
 
 .headline-sub {
   display: block;
   font-size: clamp(18px, 1.8vw, 30px);
   font-weight: 400;
-  letter-spacing: 0.06em;
+  letter-spacing: -0.01em;
   margin-top: 6px;
-  color: #595959;
+  color: var(--ink-muted);
 }
 
 .stay-stack {
@@ -263,6 +305,7 @@ a {
   text-decoration: none;
   overflow: hidden;
   background: #d8d8d8;
+  border-radius: var(--card-radius);
 }
 
 .stay-card img {
@@ -271,6 +314,11 @@ a {
   display: block;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.stay-card:hover img {
+  transform: scale(1.03);
 }
 
 .stay-card::after {
@@ -297,7 +345,7 @@ a {
   font-family: var(--heading-font);
   font-weight: 700;
   font-size: clamp(42px, 5.1vw, 86px);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   line-height: 1.08;
 }
 
@@ -321,10 +369,36 @@ a {
   letter-spacing: 0.04em;
   padding: 12px 0;
   display: inline-block;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.split-links a:hover {
+  text-decoration: underline;
 }
 
 .stay-stack--spaced {
   margin-top: 32px;
+}
+
+/* ── Town Page: Between-Cards Text ── */
+
+.town-between-text {
+  text-align: center;
+  padding: 48px 0 20px;
+}
+
+.town-between-text p {
+  margin: 0 auto 14px;
+  max-width: 680px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.town-between-text p.coming-soon-note {
+  font-style: italic;
+  color: var(--ink-muted);
+  font-size: 15px;
 }
 
 /* ── Coming Soon (Town page) ── */
@@ -360,7 +434,7 @@ a {
   font-family: var(--heading-font);
   font-size: clamp(32px, 3vw, 48px);
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
 }
 
 .coming-soon-info p {
@@ -372,7 +446,7 @@ a {
 
 .coming-soon-info p.coming-soon-note {
   font-style: italic;
-  color: #595959;
+  color: var(--ink-muted);
   font-size: 15px;
 }
 
@@ -380,7 +454,7 @@ a {
 
 .antidote-section {
   padding: 64px 0;
-  background: var(--footer-bg);
+  background: var(--bg-alt);
 }
 
 .antidote-inner {
@@ -393,20 +467,20 @@ a {
   font-family: var(--heading-font);
   font-size: clamp(32px, 3vw, 52px);
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
 }
 
 .antidote-inner p {
   margin: 0 auto 20px;
   max-width: 780px;
-  font-size: 18px;
+  font-size: var(--body-size);
   line-height: 1.7;
 }
 
 .antidote-inner p.antidote-tagline {
   font-style: italic;
   font-size: 16px;
-  color: #474747;
+  color: var(--ink-muted);
   margin-bottom: 28px;
 }
 
@@ -431,7 +505,7 @@ a {
   font-family: var(--heading-font);
   font-size: clamp(28px, 2.6vw, 44px);
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
 }
 
 .mailing-inner p {
@@ -453,8 +527,8 @@ a {
   margin: 0 0 38px;
   text-align: center;
   font-family: var(--heading-font);
-  font-size: clamp(38px, 4.4vw, 74px);
-  letter-spacing: 0.13em;
+  font-size: clamp(30px, 3.6vw, 56px);
+  letter-spacing: 0em;
   font-weight: 700;
 }
 
@@ -467,8 +541,9 @@ a {
 .post-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: #fff;
+  background: var(--card-bg);
   overflow: hidden;
+  border-radius: var(--card-radius);
 }
 
 .post-card-thumb {
@@ -498,9 +573,10 @@ a {
 .post-card h2 {
   margin: 0 0 12px;
   text-align: left;
-  font-size: clamp(18px, 1.6vw, 28px);
-  font-weight: 500;
+  font-size: clamp(16px, 1.4vw, 24px);
+  font-weight: 600;
   line-height: 1.22;
+  letter-spacing: -0.01em;
 }
 
 .post-card p {
@@ -517,6 +593,11 @@ a {
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.04em;
+  color: var(--accent);
+}
+
+.post-card-body > a:last-child:hover {
+  text-decoration: underline;
 }
 
 /* ── Stay Detail Pages ── */
@@ -559,7 +640,7 @@ a {
   margin: 0;
   font-family: var(--heading-font);
   font-size: clamp(42px, 5.6vw, 94px);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.02em;
   line-height: 1.08;
   font-weight: 700;
 }
@@ -577,6 +658,7 @@ a {
   color: inherit;
   border: 1.5px solid currentColor;
   padding: 11px 24px;
+  border-radius: var(--btn-radius);
   font-size: 10.5px;
   letter-spacing: 0.24em;
   font-weight: 600;
@@ -585,6 +667,16 @@ a {
   display: inline-block;
   cursor: pointer;
   font-family: var(--body-font);
+  transition: background 0.2s, color 0.2s;
+}
+
+.outline-btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.ghost-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .section-narrow {
@@ -600,14 +692,14 @@ a {
   margin: 0;
   font-family: var(--heading-font);
   font-size: clamp(34px, 3.2vw, 52px);
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   font-weight: 400;
 }
 
 .unit-intro p {
   margin: 18px auto 24px;
   max-width: 860px;
-  font-size: 20px;
+  font-size: var(--body-size);
   line-height: 1.6;
 }
 
@@ -622,7 +714,7 @@ a {
   font-family: var(--heading-font);
   font-size: clamp(30px, 2.8vw, 46px);
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
 }
 
 .unit-story p {
@@ -655,6 +747,11 @@ a {
   height: 100%;
   display: block;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-tile:hover img {
+  transform: scale(1.05);
 }
 
 /* ── Specs Grid (stay pages) ── */
@@ -671,7 +768,7 @@ a {
   font-family: var(--heading-font);
   font-size: clamp(32px, 3vw, 48px);
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
 }
 
 .specs-grid {
@@ -694,7 +791,7 @@ a {
   width: 30px;
   height: 30px;
   fill: none;
-  stroke: var(--ink);
+  stroke: var(--accent);
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -713,7 +810,8 @@ a {
   width: 100%;
   border: 0;
   height: 380px;
-  filter: grayscale(1) contrast(1.05);
+  /* Warm tint instead of grayscale — remove filter entirely for full colour */
+  filter: saturate(0.7) sepia(0.15) brightness(1.02);
 }
 
 .map-link {
@@ -725,6 +823,7 @@ a {
 .map-link a {
   text-decoration: none;
   border-bottom: 1px solid currentColor;
+  color: var(--accent);
 }
 
 /* ── Book Section ── */
@@ -739,28 +838,7 @@ a {
   font-size: 19px;
 }
 
-/* ── Gift Voucher Section ── */
-
-.unit-gift {
-  text-align: center;
-}
-
-.unit-gift h2 {
-  margin: 0 0 14px;
-  font-family: var(--heading-font);
-  font-size: clamp(28px, 2.6vw, 42px);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-}
-
-.unit-gift p {
-  margin: 0 auto 20px;
-  max-width: 680px;
-  font-size: 17px;
-  line-height: 1.6;
-}
-
-/* ── Instagram Feed Section ── */
+/* ── Instagram Slider ── */
 
 .unit-instagram {
   text-align: center;
@@ -771,32 +849,80 @@ a {
   font-family: var(--heading-font);
   font-size: clamp(28px, 2.6vw, 42px);
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
 }
 
-.instagram-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 9px;
+.instagram-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
 }
 
-.instagram-grid a {
-  display: block;
+.insta-track {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  flex: 1;
+  padding: 0 4px;
+}
+
+.insta-track::-webkit-scrollbar {
+  display: none;
+}
+
+.insta-slide {
+  flex: 0 0 200px;
+  width: 200px;
+  height: 200px;
+  scroll-snap-align: start;
   overflow: hidden;
-  aspect-ratio: 1 / 1;
-  background: #ddd;
+  background: var(--bg-alt);
+  display: block;
+  border-radius: 4px;
 }
 
-.instagram-grid img {
+.insta-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: opacity 0.2s;
+  transition: transform 0.3s ease, opacity 0.2s;
 }
 
-.instagram-grid a:hover img {
+.insta-slide:hover img {
   opacity: 0.85;
+  transform: scale(1.04);
+}
+
+.insta-arrow {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--card-bg);
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: background 0.2s, box-shadow 0.2s;
+  margin: 0 8px;
+  z-index: 2;
+}
+
+.insta-arrow:hover {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
 
 .instagram-follow {
@@ -807,12 +933,188 @@ a {
 .instagram-follow a {
   text-decoration: none;
   border-bottom: 1px solid currentColor;
+  color: var(--accent);
+}
+
+/* Fallback: Instagram embed widget */
+.insta-embed-wrapper {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.insta-embed-wrapper iframe {
+  width: 100%;
+  height: 520px;
+  border: 0;
+  background: var(--card-bg);
+  border-radius: 6px;
+}
+
+/* ── Place Map Link (in blog posts) ── */
+
+.place-map-link {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  color: var(--accent);
+  border: 1px solid var(--line);
+  padding: 3px 8px;
+  margin-left: 6px;
+  vertical-align: middle;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.place-map-link:hover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+/* ── Contact Section ── */
+
+.contact-section {
+  padding: 64px 0;
+  background: var(--bg-alt);
+}
+
+.contact-inner h2 {
+  margin: 0 0 10px;
+  text-align: center;
+  font-family: var(--heading-font);
+  font-size: clamp(32px, 3vw, 48px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.contact-subtext {
+  text-align: center;
+  margin: 0 0 36px;
+  font-size: 16px;
+  color: var(--ink-muted);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 48px;
+  max-width: 860px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 8px;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+}
+
+.contact-detail svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+}
+
+.contact-detail a {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.contact-detail a:hover {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-row--full {
+  grid-column: 1 / -1;
+}
+
+.contact-form label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.contact-form input,
+.contact-form textarea {
+  border: 1px solid var(--line);
+  background: var(--card-bg);
+  padding: 12px 14px;
+  font-size: 16px;
+  font-family: var(--body-font);
+  color: var(--ink);
+  transition: border-color 0.2s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.contact-form button {
+  grid-column: 1 / -1;
+  justify-self: start;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--btn-radius);
+  background: transparent;
+  padding: 12px 28px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--body-font);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.contact-form button:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+#contact-feedback {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 15px;
+  color: var(--accent);
 }
 
 /* ── Footer ── */
 
 .site-footer {
-  margin-top: 60px;
+  margin-top: 0;
   background: var(--footer-bg);
 }
 
@@ -872,6 +1174,11 @@ a {
   fill: none;
   stroke: var(--ink);
   stroke-width: 1.8;
+  transition: stroke 0.2s;
+}
+
+.social-links a:hover svg {
+  stroke: var(--accent);
 }
 
 /* ── Subscribe Form ── */
@@ -893,15 +1200,27 @@ a {
   font-family: var(--body-font);
 }
 
+.subscribe-form input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
 .subscribe-form button {
   height: 48px;
   min-width: 130px;
   border: 1.5px solid var(--ink);
+  border-radius: var(--btn-radius);
   background: transparent;
   font-size: 15px;
   letter-spacing: 0.03em;
   font-family: var(--body-font);
   cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.subscribe-form button:hover {
+  background: var(--ink);
+  color: var(--bg);
 }
 
 .policy-links {
@@ -911,7 +1230,7 @@ a {
 
 .footer-line {
   margin: 32px auto 24px;
-  border-top: 1px solid #2a2a2a;
+  border-top: 1px solid var(--line);
 }
 
 .copyright {
@@ -1080,8 +1399,9 @@ body.lightbox-open {
   }
 
   .blog-photo-wide {
-    width: 100%;
-    margin-left: 0;
+    width: 100% !important;
+    margin-left: 0 !important;
+    max-width: 100% !important;
   }
 
   .blog-photo-right,
@@ -1128,7 +1448,7 @@ body.lightbox-open {
   }
 
   .specs-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 28px 20px;
   }
 
@@ -1141,9 +1461,22 @@ body.lightbox-open {
     height: 280px;
   }
 
-  .instagram-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6px;
+  .insta-slide {
+    flex: 0 0 170px;
+    width: 170px;
+    height: 170px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .contact-info {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
   }
 
   .footer-inner {
@@ -1245,6 +1578,23 @@ body.lightbox-open {
   .logo svg {
     height: 36px;
   }
+
+  .insta-slide {
+    flex: 0 0 150px;
+    width: 150px;
+    height: 150px;
+  }
+
+  .insta-arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+    margin: 0 4px;
+  }
+
+  .contact-form {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1306,6 +1656,7 @@ body.lightbox-open {
   letter-spacing: 0.04em;
   padding: 12px 0;
   margin-bottom: 8px;
+  color: var(--accent);
 }
 
 .blog-post-hero {
@@ -1318,9 +1669,9 @@ body.lightbox-open {
 .blog-post-title {
   margin: 32px 0 24px;
   font-family: var(--heading-font);
-  font-size: clamp(32px, 3.6vw, 56px);
-  font-weight: 400;
-  letter-spacing: 0.01em;
+  font-size: clamp(26px, 3vw, 44px);
+  font-weight: var(--heading-weight);
+  letter-spacing: -0.01em;
   text-align: center;
 }
 
@@ -1332,17 +1683,17 @@ body.lightbox-open {
 .blog-post-body h2 {
   margin: 36px 0 14px;
   font-family: var(--heading-font);
-  font-size: clamp(24px, 2.4vw, 36px);
-  font-weight: 400;
-  letter-spacing: 0.01em;
+  font-size: clamp(22px, 2.2vw, 32px);
+  font-weight: var(--heading-weight);
+  letter-spacing: -0.01em;
 }
 
 .blog-post-body h3 {
   margin: 28px 0 10px;
   font-family: var(--heading-font);
-  font-size: clamp(20px, 2vw, 28px);
-  font-weight: 400;
-  letter-spacing: 0.01em;
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: var(--heading-weight);
+  letter-spacing: -0.01em;
 }
 
 .blog-post-body p {
@@ -1452,5 +1803,9 @@ body.lightbox-open {
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
   }
 }

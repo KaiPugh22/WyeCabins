@@ -3,16 +3,21 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glamping Cabin Stay | Wye Glamping</title>
-    <meta name="description" content="Hand crafted glamping cabin stay at Wye Glamping near Hay-on-Wye in the Brecon Beacons.">
-    <meta property="og:title" content="Glamping Cabin Stay | Wye Glamping">
-    <meta property="og:description" content="Hand crafted glamping cabin stay at Wye Glamping near Hay-on-Wye in the Brecon Beacons.">
+    <title>Cabin Stay | Wye Cabins</title>
+    <meta name="description" content="Hand crafted cabin stay at Wye Cabins near Hay-on-Wye in the Brecon Beacons.">
+    <link rel="canonical" href="https://wyecabins.co.uk/stay.html">
+    <meta property="og:title" content="Cabin Stay | Wye Cabins">
+    <meta property="og:description" content="Hand crafted cabin stay at Wye Cabins near Hay-on-Wye in the Brecon Beacons.">
     <meta property="og:image" content="assets/images/Holly/Holly%20Cover.webp">
+    <meta property="og:url" content="https://wyecabins.co.uk/stay.html">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cabin Stay | Wye Cabins">
+    <meta name="twitter:description" content="Hand crafted cabin stay at Wye Cabins near Hay-on-Wye.">
+    <meta name="twitter:image" content="assets/images/Holly/Holly%20Cover.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Raleway:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body data-page="stay">
@@ -22,10 +27,10 @@
 
     <main id="main-content" class="unit-page">
       <section class="unit-hero" id="unitHero">
-        <img id="unitHeroImage" src="assets/images/Holly/Holly%20Cover.webp" alt="Glamping cabin at Wye Glamping near Hay-on-Wye" width="1500" height="1000">
+        <img id="unitHeroImage" src="assets/images/Holly/Holly%20Cover.webp" alt="Cabin at Wye Cabins near Hay-on-Wye" width="1500" height="1000">
         <div class="unit-hero-overlay">
           <h1 id="unitHeroTitle">HOLLY</h1>
-          <p id="unitHeroMeta">Wye Glamping</p>
+          <p id="unitHeroMeta">Wye Cabins</p>
           <a class="ghost-btn" href="#unitBook">BOOK NOW</a>
         </div>
       </section>
@@ -55,12 +60,6 @@
         <a class="outline-btn" href="mailto:info@wyeglamping.co.uk?subject=Booking%20Enquiry">BOOK YOUR STAY</a>
       </section>
 
-      <section class="unit-gift section-narrow">
-        <h2>Gift Vouchers</h2>
-        <p>Treat someone special to a stay at Wye Glamping. Our gift vouchers make the perfect present for birthdays, anniversaries or just because.</p>
-        <a class="outline-btn" href="mailto:info@wyeglamping.co.uk?subject=Gift%20Voucher%20Enquiry">ENQUIRE ABOUT VOUCHERS</a>
-      </section>
-
       <section class="unit-map section-narrow">
         <h2>Find Us</h2>
         <iframe id="unitMapFrame" title="Map showing cabin location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
@@ -69,16 +68,10 @@
 
       <section class="unit-instagram section-narrow" id="unitInstagram">
         <h2>Follow us on Instagram</h2>
-        <div class="instagram-grid" id="instagramGrid">
-          <a href="https://www.instagram.com/wye_glamping/" target="_blank" rel="noreferrer" aria-label="Wye Glamping on Instagram (opens in new tab)">
-            <img src="assets/images/Holly/Holly-cabin-at-Wye-Glamping-in-Wales.webp" alt="" loading="lazy" width="1500" height="1000">
-          </a>
-          <a href="https://www.instagram.com/wye_glamping/" target="_blank" rel="noreferrer" aria-label="Wye Glamping on Instagram (opens in new tab)">
-            <img src="assets/images/Bramble/Bramble-cabin-provides-the-perfect-glamping-holiday-for-couples-in-Wales-at-Wye-Glamping.jpg" alt="" loading="lazy" width="1600" height="1067">
-          </a>
-          <a href="https://www.instagram.com/wye_glamping/" target="_blank" rel="noreferrer" aria-label="Wye Glamping on Instagram (opens in new tab)">
-            <img src="assets/images/Holly/Holly-cabin-by-the-stream-at-Wye-Glamping-in-Wales-for-families.webp" alt="" loading="lazy" width="1500" height="1000">
-          </a>
+        <div class="instagram-slider">
+          <button class="insta-arrow" id="instaPrev" aria-label="Previous posts">&lsaquo;</button>
+          <div class="insta-track" id="instagramTrack"></div>
+          <button class="insta-arrow" id="instaNext" aria-label="Next posts">&rsaquo;</button>
         </div>
         <p class="instagram-follow"><a href="https://www.instagram.com/wye_glamping/" target="_blank" rel="noreferrer">@wye_glamping</a></p>
       </section>

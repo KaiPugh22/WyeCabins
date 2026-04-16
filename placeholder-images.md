@@ -1,88 +1,78 @@
-# Placeholder Images to Replace
+# Placeholder Images
 
-All images below are currently using cabin/site photos as stand-ins.
-Check off each item once you have replaced it with the real photo.
+Status of each image slot. `x` = real photo wired in, empty = still a placeholder.
 
 ---
 
 ## Blog Post: Things to do near Hay-on-Wye
 
-- [ ] **Panoramic view of the Brecon Beacons countryside**
-  - Current src: `assets/images/Holly/Holly-cabin-at-Wye-Glamping-for-families-in-Wales.webp`
-  - CSS class: `blog-photo`
+- [x] **Panoramic Brecon Beacons countryside**
+  - `assets/images/brecon-beacons-national-park-united-kingdom-nature-landscapes-76985a-1024.jpg`
 
-- [ ] **Hay-on-Wye high street with independent bookshops**
-  - Current src: `assets/images/Holly/Interior-detail-in-Holly-cabin-at-Wye-Glamping-with-kids-in-Wales.webp`
-  - CSS class: `blog-photo-right`
+- [x] **Hay-on-Wye town rooftops**
+  - `assets/images/5893961312_52762b117d_b.jpg`
+  - Note: used in the "Hay-on-Wye / bookshops" paragraph — shows the town skyline, not a shopfront. Alt updated accordingly.
 
-- [ ] **Pebble beach at Glasbury on the River Wye**
-  - Current src: `assets/images/Holly/Holly-cabin-by-the-stream-at-Wye-Glamping-in-Wales-for-families.webp`
-  - CSS class: (inside `blog-photo-pair` div, no class on img)
+- [x] **Pebble beach at Glasbury on the River Wye**
+  - `assets/images/River_Wye_shingle,_Glasbury_-_geograph.org.uk_-_2737588.jpg`
 
-- [ ] **Swimmers enjoying a calm stretch of the River Wye**
-  - Current src: `assets/images/Bramble/Bramble-cabin-provides-the-perfect-family-glamping-holiday-in-Wales.jpg`
-  - CSS class: (inside `blog-photo-pair` div, no class on img)
+- [x] **Wild swimmers on the River Wye**
+  - `assets/images/Screen+Shot+2021-02-17+at+17.28.00.png.webp`
 
-- [ ] **Sweeping panoramic view from the top of Hay Bluff**
-  - Current src: `assets/images/Bramble/View-from-Bramble-cabin-at-Wye-Glamping-family-holidays-in-Wales%20(1).jpg`
-  - CSS class: `blog-photo-wide`
+- [x] **Sweeping Brecon Beacons panorama**
+  - `assets/images/16033767030_0bb47b4e95_4k.jpg`
 
-- [ ] **Walkers on a Brecon Beacons trail**
-  - Current src: `assets/images/Bramble/Bramble-cabin-at-Wye-Glamping-is-perfect-for-a-family-glamping-holiday-in-Wales.jpg`
-  - CSS class: `blog-photo-left`
+- [x] **Walkers on a Brecon Beacons trail**
+  - `assets/images/26285326532_f69d788a4d_b.jpg`
 
 ---
 
 ## Blog Post: A day in Hay-on-Wye
 
-- [ ] **View along the main street of Hay-on-Wye**
-  - Current src: `assets/images/retreat-a.jpg`
-  - CSS class: `blog-photo`
+- [x] **Main street of Hay-on-Wye (clocktower)**
+  - `assets/images/The_Clocktower_in_Hay-on-Wye_-_geograph.org.uk_-_3101082.jpg`
 
-- [ ] **Shelves of books inside one of Hay's famous bookshops**
-  - Current src: `assets/images/Holly/The-interior-of-Holly-cabin-at-Wye-Glamping-in-Wales.webp`
-  - CSS class: `blog-photo-left`
+- [x] **Bookshop interior (Richard Booth's)**
+  - `assets/images/RB-Book-Shop-7-of-158-scaled.jpg`
 
-- [ ] **Tapas and drinks at Tomatitos in Hay-on-Wye**
-  - Current src: `assets/images/Holly/Private-and-well-equipped-glamp-kitchens-at-Wye-Glamping.webp`
-  - CSS class: `blog-photo-right`
+- [x] **Tomatitos bar in Hay-on-Wye**
+  - `assets/images/tomatitos-tapas-bar.jpg`
+  - Note: copy updated — Tomatitos no longer referenced as a tapas bar.
 
-- [ ] **The old bridge crossing the River Wye at Hay**
-  - Current src: `assets/images/retreat-b.jpg`
-  - CSS class: (inside `blog-photo-pair` div, no class on img)
+- [x] **Old stone bridge crossing the River Wye at Hay**
+  - `assets/images/hay-bridge-wye.jpg`
+- [x] **Hay Castle**
+  - `assets/images/visit-plan.jpg`
 
-- [ ] **Hay Castle seen from the riverside walk**
-  - Current src: `assets/images/retreat-c.jpg`
-  - CSS class: (inside `blog-photo-pair` div, no class on img)
-
-- [ ] **Fire pit under the stars at Wye Glamping**
-  - Current src: `assets/images/Bramble/Bramble-cabin-provides-the-perfect-glamping-holiday-for-couples-in-Wales-at-Wye-Glamping.jpg`
-  - CSS class: `blog-photo-wide`
+- [REMOVED] **Fire pit under the stars at Wye Cabins** — slot deleted (no photo available).
 
 ---
 
-## Blog Post: Where to eat near Wye Glamping
+## Blog Post: Where to eat near Wye Cabins
 
-- [ ] **Warm candlelit interior of The Griffin at Felin Fach**
-  - Current src: `assets/images/Bramble/Inside-the-beautiful-Bramble-cabin-at-Wye-Glamping-for-couples-with-dogs-in-Wales.jpg`
-  - CSS class: `blog-photo`
+- [x] **The Griffin at Felin Fach (intro image)**
+  - `assets/images/Felin-Fach-Griffin.jpg`
 
-- [ ] **Colourful tapas plates at Tomatitos**
-  - Current src: `assets/images/Holly/The-day-bed-in-Holly-cabin-at-Wye-Glamping-in-Wales.webp`
-  - CSS class: `blog-photo-right`
+- [REMOVED] **Colourful tapas plates at Tomatitos** — slot deleted; copy updated to drop tapas reference.
 
-- [ ] **Outdoor supper club dining under festoon lights**
-  - Current src: `assets/images/Bramble/Bramble%20Cover.jpeg`
-  - CSS class: `blog-photo-wide`
+- [x] **Off Grid Gourmet supper club**
+  - `assets/images/off-grid-gourmet.jpg`
+- [x] **Honey Café, Bronllys (interior)**
+  - `assets/images/caption.jpg`
 
-- [ ] **The welcoming interior of the Honey Cafe in Bronllys**
-  - Current src: `assets/images/Holly/Holly-cabin-at-Wye-Glamping-in-Wales.webp`
-  - CSS class: `blog-photo-left`
+- [x] **Foyles of Glasbury**
+  - `assets/images/foyles-glasbury.jpg`
+  - Note: slot changed from a 2-image pair (Foyles + afternoon tea) to a single landscape image since no afternoon-tea photo is available.
 
-- [ ] **Garden terrace dining at Foyles in Glasbury**
-  - Current src: `assets/images/gainsborough.jpg`
-  - CSS class: (inside `blog-photo-pair` div, no class on img)
+---
 
-- [ ] **Afternoon tea spread at a local restaurant**
-  - Current src: `assets/images/roundhouse-main.jpg`
-  - CSS class: (inside `blog-photo-pair` div, no class on img)
+## Book Nook cabin (all 9 still placeholders)
+
+- [ ] Hero + 8 gallery images — `assets/images/BookNook/placeholder-1..9.svg`
+  - Referenced from `index.html`, `town.html`, and `script.js` (`the-book-nook` unit).
+
+---
+
+## Unused images in `assets/images/`
+
+- `320401.jpg` — small Black Mountains valley shot. Left unused; the 4K Brecon panorama covers the same slot better.

@@ -1,0 +1,40 @@
+{
+  "brand": {
+    "name": "Wye Cabins",
+    "tagline": "Hand crafted cabins near Hay-on-Wye.",
+    "copyright": "\u00a92026 - WYE CABINS - Hand crafted cabins near Hay-on-Wye."
+  },
+  "contact": {
+    "email": "info@wyeglamping.co.uk",
+    "phone": "07974 000421",
+    "bookingUrl": "https://booking-directly.com/widgets/9CN882V7vf1Yfx78pC7SZwVe4x2Li3quF98K9z0DEMogyAWYWFLxe1mPuYwt6/properties/unit-selection"
+  },
+  "social": {
+    "facebookUrl": "https://www.facebook.com/pages/Wye%20Glamping/625040167843407/",
+    "instagramUrl": "https://www.instagram.com/wye_glamping/",
+    "instagramUsername": "wye_glamping",
+    "instagramToken": ""
+  },
+  "nav": [
+    { "href": "town.html", "label": "Town" },
+    { "href": "country.html", "label": "Country" },
+    { "href": "blog.html", "label": "Blog" },
+    { "href": "#contact-section", "label": "Contact" }
+  ],
+  "footer": {
+    "socialHeading": "Follow Wye Cabins",
+    "policyLinks": [
+      { "href": "privacy.html", "label": "Privacy Policy" },
+      { "href": "terms.html", "label": "Terms & Conditions" }
+    ]
+  },
+  "contactSection": {
+    "heading": "Get in Touch",
+    "subtext": "Questions about availability, directions, or anything else? Drop us a message.",
+    "submitLabel": "SEND MESSAGE",
+    "successMessage": "Thank you! We'll get back to you shortly."
+  },
+  "subscribe": {
+    "successMessage": "Thank you for subscribing!"
+  }
+}

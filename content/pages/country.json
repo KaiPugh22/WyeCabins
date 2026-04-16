@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "Country Cabins near Hay-on-Wye | Wye Cabins",
+    "description": "Escape to off-grid cabins in the Brecon Beacons. Choose Holly or Bramble for mountain views, wood burners and wild flower meadows near Hay-on-Wye.",
+    "ogDescription": "Escape to off-grid cabins in the Brecon Beacons. Choose Holly or Bramble for mountain views, wood burners and wild flower meadows near Hay-on-Wye.",
+    "ogImage": "assets/images/Holly/Holly%20Cover.webp"
+  },
+  "headline": "Where would you like to stay?",
+  "cabinStack": [
+    {
+      "unit": "holly",
+      "title": "HOLLY",
+      "tagline": "Nestled amongst the trees",
+      "image": "assets/images/Holly/Holly Cover.webp",
+      "alt": "Holly cabin nestled amongst the trees",
+      "width": 1500,
+      "height": 1000,
+      "eager": true
+    },
+    {
+      "unit": "bramble",
+      "title": "BRAMBLE",
+      "tagline": "Stunning mountain views",
+      "image": "assets/images/Bramble/Bramble Cover.jpeg",
+      "alt": "Bramble cabin with mountain views",
+      "width": 1600,
+      "height": 1067
+    }
+  ]
+}

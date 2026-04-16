@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "title": "Hand Crafted Cabins in Hay-on-Wye | Wye Cabins",
+    "description": "Book hand crafted cabins in the Brecon Beacons near Hay-on-Wye. Romantic retreats with mountain views, fire pits and starry skies. Choose from Holly, Bramble or The Book Nook.",
+    "ogDescription": "Book hand crafted cabins in the Brecon Beacons near Hay-on-Wye. Romantic retreats with mountain views, fire pits and starry skies.",
+    "ogImage": "assets/images/Holly/Holly%20Cover.webp"
+  },
+  "headline": {
+    "title": "Hand Crafted Cabins",
+    "subtitle": "Hay-on-Wye"
+  },
+  "cabinStack": [
+    {
+      "unit": "holly",
+      "title": "HOLLY",
+      "tagline": "Nestled amongst the trees",
+      "image": "assets/images/Holly/Holly Cover.webp",
+      "alt": "Holly cabin nestled amongst the trees at Wye Cabins",
+      "width": 1500,
+      "height": 1000,
+      "eager": true
+    },
+    {
+      "unit": "bramble",
+      "title": "BRAMBLE",
+      "tagline": "Stunning mountain views",
+      "image": "assets/images/Bramble/Bramble Cover.jpeg",
+      "alt": "Bramble cabin with mountain views at Wye Cabins",
+      "width": 1600,
+      "height": 1067
+    }
+  ],
+  "countryLink": {
+    "label": "Browse Country Stays",
+    "href": "country.html"
+  },
+  "townStack": [
+    {
+      "unit": "booknook",
+      "title": "THE BOOK NOOK",
+      "tagline": "In the heart of Hay-on-Wye",
+      "image": "assets/images/BookNook/placeholder-1.svg",
+      "alt": "The Book Nook cabin in the heart of Hay-on-Wye",
+      "width": 2500,
+      "height": 1665
+    }
+  ],
+  "townLink": {
+    "label": "Browse Town Stays",
+    "href": "town.html"
+  },
+  "antidote": {
+    "title": "The antidote to modern life",
+    "body": "Wye Cabins is perfect for a romantic retreat or just something a bit different. We offer everything you need to relax in style, surrounded by nature. Nestled in a magical corner of the Brecon Beacons National Park, you'd struggle to find a better site. We've got mountain views, a babbling brook, incredible wild flowers and oodles of space to explore. By night, sit around the fire pit under incredible starry skies.",
+    "tagline": "Whether you're after a romantic retreat or just something a bit different, join us for the ultimate stress free holiday.",
+    "ctaLabel": "EXPLORE OUR CABINS",
+    "ctaHref": "country.html"
+  },
+  "mailing": {
+    "title": "Subscribe to our mailing list",
+    "body": "Sign up with your email address to receive news and special offers. We promise to respect your inbox.",
+    "placeholder": "Email Address",
+    "submitLabel": "SIGN UP"
+  }
+}

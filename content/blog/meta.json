@@ -1,0 +1,40 @@
+{
+  "posts": [
+    {
+      "slug": "things-to-do",
+      "title": "Things to do near Hay-on-Wye",
+      "heroImage": "assets/images/Holly/Holly-cabin-by-the-stream-at-Wye-Glamping-in-Wales-for-families.webp",
+      "heroAlt": "Stream running past a woodland cabin",
+      "cardImage": "assets/images/Holly/Holly-cabin-by-the-stream-at-Wye-Glamping-in-Wales-for-families.webp",
+      "cardAlt": "Stream running past a woodland cabin at Wye Cabins",
+      "cardWidth": 1500,
+      "cardHeight": 1000,
+      "excerpt": "From wild swimming at Glasbury's pebble beaches to climbing Hay Bluff for sweeping mountain views, there's no shortage of adventure on our doorstep.",
+      "metaDescription": "Things to do near Hay-on-Wye \u2014 wild swimming, Hay Bluff walks, bookshops, and family activities. Stories and guides from Wye Cabins."
+    },
+    {
+      "slug": "a-day-in-hay",
+      "title": "A day in Hay-on-Wye",
+      "heroImage": "assets/images/Bramble/View-from-Bramble-cabin-at-Wye-Glamping-family-holidays-in-Wales (1).jpg",
+      "heroAlt": "Mountain view from Bramble cabin",
+      "cardImage": "assets/images/Bramble/View-from-Bramble-cabin-at-Wye-Glamping-family-holidays-in-Wales (1).jpg",
+      "cardAlt": "Mountain view from Bramble cabin at Wye Cabins",
+      "cardWidth": 1600,
+      "cardHeight": 1067,
+      "excerpt": "Known as the town of books, Hay-on-Wye is bursting with independent bookshops and cosy cafes. Browse quirky finds, grab local ice cream, and catch the Thursday market.",
+      "metaDescription": "A perfect day in Hay-on-Wye: where to eat, which bookshops to visit, and how to make the most of the River Wye and Black Mountains."
+    },
+    {
+      "slug": "where-to-eat",
+      "title": "Where to eat near Wye Cabins",
+      "heroImage": "assets/images/Bramble/The-toasty-woodburner-inside-Bramble-cabin-at-Wye-Glamping-in-Wales-for-couples.jpg",
+      "heroAlt": "Wood burner inside Bramble cabin",
+      "cardImage": "assets/images/Bramble/The-toasty-woodburner-inside-Bramble-cabin-at-Wye-Glamping-in-Wales-for-couples.jpg",
+      "cardAlt": "Wood burner inside Bramble cabin at Wye Cabins",
+      "cardWidth": 1600,
+      "cardHeight": 1067,
+      "excerpt": "From The Griffin at Felin Fach for a special occasion to Tomatitos for a lively evening, discover our favourite local restaurants, pubs and cafes.",
+      "metaDescription": "The best restaurants, pubs, cafes and supper clubs near Hay-on-Wye and the Brecon Beacons \u2014 recommended by Wye Cabins."
+    }
+  ]
+}

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wyeglamping.co.uk/sitemap.xml
+Sitemap: https://wyecabins.co.uk/sitemap.xml

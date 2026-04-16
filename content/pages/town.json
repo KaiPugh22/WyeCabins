@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "title": "Town Stays in Hay-on-Wye | The Book Nook & Hay Glamping | Wye Cabins",
+    "description": "Stay in the heart of Hay-on-Wye at The Book Nook cabin, or enjoy luxury bell tents at Hay Glamping during the Hay Festival. Hand crafted glamping from Wye Cabins.",
+    "ogDescription": "Stay in the heart of Hay-on-Wye at The Book Nook cabin, or enjoy luxury bell tents at Hay Glamping during the Hay Festival.",
+    "ogImage": "assets/images/hero-cabin.jpg"
+  },
+  "headline": "Where would you like to stay?",
+  "bookNook": {
+    "unit": "booknook",
+    "title": "THE BOOK NOOK",
+    "tagline": "In the heart of Hay-on-Wye",
+    "image": "assets/images/BookNook/placeholder-1.svg",
+    "alt": "The Book Nook cabin in the heart of Hay-on-Wye",
+    "width": 2500,
+    "height": 1665,
+    "eager": true
+  },
+  "hayGlampingIntro": [
+    "Our luxury pop-up glamping village, just a short stroll from the Hay Festival gates. Spacious bell tents with real beds, crisp linen, continental breakfast and a communal firepit to end the evening. Running since 2014, it's the perfect base for festival-goers who want comfort without compromise.",
+    "Open during Hay Festival only (21 May \u2013 1 June 2026). Visit <a href=\"https://www.hay-glamping.co.uk\" target=\"_blank\" rel=\"noreferrer\" class=\"underline-link\">hay-glamping.co.uk</a> for dates and booking."
+  ],
+  "hayGlampingCard": {
+    "title": "HAY GLAMPING",
+    "tagline": "Luxury bell tents for Hay Festival",
+    "badge": "Hay Festival Only",
+    "image": "assets/images/Bramble/View-from-Bramble-cabin-at-Wye-Glamping-family-holidays-in-Wales (1).jpg",
+    "alt": "Hay Glamping bell tents near Hay Festival",
+    "width": 1600,
+    "height": 1067,
+    "href": "https://www.hay-glamping.co.uk"
+  }
+}

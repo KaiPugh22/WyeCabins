@@ -1,0 +1,32 @@
+{
+  "slug": "holly",
+  "title": "HOLLY",
+  "meta": "Countryside \u00b7 Brecon Beacons",
+  "introTitle": "Welcome to Holly",
+  "introText": "Overlooking the babbling brook, Holly is a hand-built wooden cabin, unique and full of character. It occupies the most private spot on site and feels very tucked away in the woods. Well suited for those who love the outdoors, with its separate kitchen hut and outdoor shelter which enables alfresco dining whatever the weather.",
+  "storyTitle": "Tucked away in the woods",
+  "storyText": "Holly is a yurt-inspired cabin built by a local craftsman using reclaimed and locally sourced materials. Popular for its den-like feel and privacy amongst the trees, it overlooks the stream and offers a truly off-grid escape. Whether you're after a romantic retreat or a family glamping experience, Holly is the perfect place to unwind, surrounded by nature.",
+  "heroImage": "assets/images/Holly/Holly Cover.webp",
+  "gallery": [
+    "assets/images/Holly/Holly Cover.webp",
+    "assets/images/Holly/Holly-cabin-at-Wye-Glamping-for-families-and-couples-in-Wales.webp",
+    "assets/images/Holly/Holly-cabin-at-Wye-Glamping-for-families-in-Wales.webp",
+    "assets/images/Holly/Holly-cabin-at-Wye-Glamping-in-Wales.webp",
+    "assets/images/Holly/Holly-cabin-by-the-stream-at-Wye-Glamping-in-Wales-for-families.webp",
+    "assets/images/Holly/Holly-cabin-is-perfect-for-family-glamping-at-Wye-Glamping-in-Wales.webp",
+    "assets/images/Holly/Interior-detail-in-Holly-cabin-at-Wye-Glamping-with-kids-in-Wales.webp",
+    "assets/images/Holly/Private-and-well-equipped-glamp-kitchens-at-Wye-Glamping.webp",
+    "assets/images/Holly/The-day-bed-in-Holly-cabin-at-Wye-Glamping-in-Wales.webp"
+  ],
+  "specs": [
+    { "icon": "sleeps", "label": "Sleeps 2 + Infant" },
+    { "icon": "bed", "label": "King Bed & Day Bed" },
+    { "icon": "flame", "label": "Wood Burner" },
+    { "icon": "solar", "label": "Off-Grid & Solar" },
+    { "icon": "kitchen", "label": "Private Kitchen Hut" },
+    { "icon": "firepit", "label": "Fire Pit Dining" },
+    { "icon": "shower", "label": "Hot Water Shower" },
+    { "icon": "nature", "label": "Woodland & Stream" }
+  ],
+  "mapQuery": "Felindre, Brecon, Powys"
+}

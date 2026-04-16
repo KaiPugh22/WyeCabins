@@ -1,0 +1,32 @@
+{
+  "slug": "booknook",
+  "title": "THE BOOK NOOK",
+  "meta": "Town Centre \u00b7 Hay-on-Wye",
+  "introTitle": "Welcome to The Book Nook",
+  "introText": "Located in the heart of Hay-on-Wye, The Book Nook offers the perfect blend of town convenience and rustic charm. Step outside your door and you're moments from the famous bookshops, cafes and markets that make Hay so special.",
+  "storyTitle": "Town life, cabin style",
+  "storyText": "The Book Nook brings our signature hand-crafted glamping experience to the centre of Hay-on-Wye. Enjoy the warmth of a wood burner, the comfort of a king-size bed, and the buzz of the town just a short stroll away. Perfect for book lovers, foodies, and anyone who wants to explore Hay at their own pace.",
+  "heroImage": "assets/images/BookNook/placeholder-1.svg",
+  "gallery": [
+    "assets/images/BookNook/placeholder-1.svg",
+    "assets/images/BookNook/placeholder-2.svg",
+    "assets/images/BookNook/placeholder-3.svg",
+    "assets/images/BookNook/placeholder-4.svg",
+    "assets/images/BookNook/placeholder-5.svg",
+    "assets/images/BookNook/placeholder-6.svg",
+    "assets/images/BookNook/placeholder-7.svg",
+    "assets/images/BookNook/placeholder-8.svg",
+    "assets/images/BookNook/placeholder-9.svg"
+  ],
+  "specs": [
+    { "icon": "sleeps", "label": "Sleeps 2" },
+    { "icon": "bed", "label": "King Bed" },
+    { "icon": "flame", "label": "Wood Burner" },
+    { "icon": "kitchen", "label": "Kitchenette" },
+    { "icon": "location", "label": "Town Centre" },
+    { "icon": "firepit", "label": "Fire Pit" },
+    { "icon": "shower", "label": "En-Suite Shower" },
+    { "icon": "garden", "label": "Private Courtyard" }
+  ],
+  "mapQuery": "Hay-on-Wye, Powys"
+}
