@@ -28,5 +28,13 @@
     { "icon": "shower", "label": "En-Suite Shower" },
     { "icon": "garden", "label": "Private Courtyard" }
   ],
-  "mapQuery": "Hay-on-Wye, Powys"
+  "mapQuery": "Hay-on-Wye, Powys",
+  "schema": {
+    "name": "The Book Nook — Wye Cabins",
+    "description": "A hand-crafted cabin in the heart of Hay-on-Wye with king bed, wood burner, en-suite shower and private courtyard. Town-centre glamping steps from the famous bookshops.",
+    "occupancy": 2,
+    "numberOfRooms": 1,
+    "amenityFeature": ["Wood Burner", "Fire Pit", "Kitchenette", "En-Suite Shower", "Private Courtyard"],
+    "petsAllowed": false
+  }
 }

@@ -7,23 +7,23 @@ Status of each image slot. `x` = real photo wired in, empty = still a placeholde
 ## Blog Post: Things to do near Hay-on-Wye
 
 - [x] **Panoramic Brecon Beacons countryside**
-  - `assets/images/brecon-beacons-national-park-united-kingdom-nature-landscapes-76985a-1024.jpg`
+  - `assets/images/brecon-beacons-landscape.jpg`
 
 - [x] **Hay-on-Wye town rooftops**
-  - `assets/images/5893961312_52762b117d_b.jpg`
+  - `assets/images/hay-on-wye-rooftops.jpg`
   - Note: used in the "Hay-on-Wye / bookshops" paragraph — shows the town skyline, not a shopfront. Alt updated accordingly.
 
 - [x] **Pebble beach at Glasbury on the River Wye**
-  - `assets/images/River_Wye_shingle,_Glasbury_-_geograph.org.uk_-_2737588.jpg`
+  - `assets/images/glasbury-pebble-beach.jpg`
 
 - [x] **Wild swimmers on the River Wye**
-  - `assets/images/Screen+Shot+2021-02-17+at+17.28.00.png.webp`
+  - `assets/images/wild-swimmers-wye.webp`
 
 - [x] **Sweeping Brecon Beacons panorama**
-  - `assets/images/16033767030_0bb47b4e95_4k.jpg`
+  - `assets/images/brecon-beacons-panorama.jpg`
 
 - [x] **Walkers on a Brecon Beacons trail**
-  - `assets/images/26285326532_f69d788a4d_b.jpg`
+  - `assets/images/hay-bluff-walkers.jpg`
 
 ---
 

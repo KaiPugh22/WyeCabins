@@ -28,5 +28,13 @@
     { "icon": "mountain", "label": "Mountain Views" },
     { "icon": "shower", "label": "Luxury Shower" }
   ],
-  "mapQuery": "Felindre, Brecon, Powys"
+  "mapQuery": "Felindre, Brecon, Powys",
+  "schema": {
+    "name": "Bramble Cabin — Wye Cabins",
+    "description": "A luxurious hand-crafted cabin with stunning Black Mountain views, king bed, wood burner, integrated kitchenette and fire pit. Off-grid glamping in the Brecon Beacons near Hay-on-Wye.",
+    "occupancy": 2,
+    "numberOfRooms": 1,
+    "amenityFeature": ["Wood Burner", "Fire Pit & BBQ", "Integrated Kitchenette", "Solar Power", "Luxury Shower", "Mountain Views"],
+    "petsAllowed": false
+  }
 }

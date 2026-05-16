@@ -1,3 +1,19 @@
+/* ── Self-hosted fonts ── */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('assets/fonts/raleway.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Abril Fatface';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('assets/fonts/abril-fatface.woff2') format('woff2');
+}
+
 /* ══════════════════════════════════════════════════════════
    THEME — Change these variables to restyle the whole site.
    Colours, fonts, spacing all live here for easy tweaking.
@@ -236,7 +252,9 @@ a {
   gap: 5px;
   background: none;
   border: none;
-  padding: 10px;
+  padding: 12px;
+  min-width: 44px;
+  min-height: 44px;
   cursor: pointer;
   z-index: 2;
 }
@@ -1550,6 +1568,10 @@ body.lightbox-open {
     display: flex;
   }
 
+  body:has(.nav-open) {
+    overflow: hidden;
+  }
+
   .main-nav a {
     font-size: 12px;
     letter-spacing: 0.18em;
@@ -1776,6 +1798,21 @@ body.lightbox-open {
 
 .blog-post-body h2 {
   clear: both;
+}
+
+.blog-cta-box {
+  margin-top: 48px;
+  padding: 32px;
+  text-align: center;
+  background: var(--card-bg);
+  border-radius: 12px;
+  clear: both;
+}
+
+.blog-cta-box p {
+  font-family: var(--heading-font);
+  font-size: 24px;
+  margin-bottom: 16px;
 }
 
 @media (max-width: 980px) {

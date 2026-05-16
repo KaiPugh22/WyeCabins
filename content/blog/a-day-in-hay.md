@@ -2,11 +2,11 @@
 
 Known as the town of books, Hay-on-Wye is bursting with independent bookshops and cosy cafes. It's the kind of place where you can lose an entire afternoon browsing shelves, and every street seems to have another surprise tucked around the corner.
 
-<img class="blog-photo" src="assets/images/The_Clocktower_in_Hay-on-Wye_-_geograph.org.uk_-_3101082.jpg" alt="The clocktower on the main street of Hay-on-Wye" loading="lazy">
+<img class="blog-photo" src="assets/images/hay-on-wye-clocktower.jpg" alt="The clocktower on the main street of Hay-on-Wye" loading="lazy">
 
 ## Morning
 
-<img class="blog-photo-left" src="assets/images/RB-Book-Shop-7-of-158-scaled.jpg" alt="Shelves of books inside Richard Booth's Bookshop in Hay-on-Wye" loading="lazy">
+<img class="blog-photo-left" src="assets/images/richard-booth-bookshop.jpg" alt="Shelves of books inside Richard Booth's Bookshop in Hay-on-Wye" loading="lazy">
 
 Start your day with coffee and breakfast at [The Granary](https://thegranaryhay.co.uk/){{map:"The Granary Hay-on-Wye"}}, right in the heart of town near the Town Clock. Their home-cooked lunches and cakes are worth coming back for later too. After breakfast, wander through Hay's famous bookshops — there are over twenty of them. [Booths](https://boothbooks.co.uk/) is the biggest and most iconic, sprawling through multiple rooms of an old cinema. Addyman's is wonderful for rare and secondhand finds.
 

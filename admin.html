@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Wye Cabins Admin</title>
+  <script src="assets/vendor/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f0; color: #2a2e24; line-height: 1.5; }
+
+    /* ── Layout ── */
+    .admin-shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+    .sidebar { background: #2a2e24; color: #e8e4d4; padding: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; }
+    .sidebar-header { padding: 16px 20px; border-bottom: 1px solid #3a3e34; display: flex; align-items: center; justify-content: space-between; }
+    .sidebar-header h1 { font-size: 14px; font-weight: 600; letter-spacing: .08em; }
+    .sidebar-body { flex: 1; overflow-y: auto; padding: 8px 0; }
+    .sidebar-footer { padding: 12px 20px; border-top: 1px solid #3a3e34; }
+    .sidebar-footer a { color: #8a8e80; font-size: 12px; text-decoration: none; }
+    .sidebar-footer a:hover { color: #e8e4d4; }
+    .sidebar-section { padding: 4px 0; }
+    .sidebar-section h3 { font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: #6a6e60; padding: 12px 20px 4px; }
+    .sidebar button { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; background: none; border: none; color: #b0aca0; padding: 5px 20px; font-size: 13px; cursor: pointer; transition: all .12s; }
+    .sidebar button:hover { background: #3a3e34; color: #fff; }
+    .sidebar button.active { background: #3a3e34; color: #fff; border-left: 3px solid #5a7050; padding-left: 17px; }
+    .sidebar button .icon { width: 16px; height: 16px; opacity: .6; flex-shrink: 0; }
+    .sidebar button.active .icon { opacity: 1; }
+
+    .main { padding: 0; overflow-y: auto; }
+    .main-header { padding: 20px 32px; border-bottom: 1px solid #e0dcd0; background: #fff; position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .main-header h2 { font-size: 18px; font-weight: 600; }
+    .main-header .file-path { font-size: 11px; color: #8a8e80; font-family: monospace; }
+    .main-header-left { display: flex; flex-direction: column; gap: 2px; }
+    .main-header-right { display: flex; gap: 8px; align-items: center; }
+    .main-body { padding: 24px 32px 60px; max-width: 960px; }
+
+    /* ── Unsaved indicator ── */
+    .unsaved-dot { width: 8px; height: 8px; border-radius: 50%; background: #d08040; display: none; }
+    .unsaved-dot.show { display: block; }
+    .save-hint { font-size: 11px; color: #d08040; display: none; }
+    .save-hint.show { display: block; }
+
+    /* ── Fields ── */
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: #6b7060; margin-bottom: 3px; }
+    .field input, .field textarea, .field select { width: 100%; padding: 8px 10px; border: 1px solid #d0ccc0; border-radius: 6px; font-size: 14px; background: #fff; font-family: inherit; transition: border-color .15s, box-shadow .15s; }
+    .field textarea { min-height: 100px; resize: vertical; font-family: 'SF Mono', 'Monaco', 'Consolas', monospace; font-size: 13px; line-height: 1.6; }
+    .field textarea.tall { min-height: 350px; }
+    .field input:focus, .field textarea:focus { outline: none; border-color: #5a7050; box-shadow: 0 0 0 3px rgba(90,112,80,.12); }
+
+    /* Image path fields */
+    .field-image-wrap { position: relative; }
+    .field-image-wrap input { padding-right: 80px; }
+    .field-image-preview { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+    .field-image-preview img { width: 64px; height: 48px; object-fit: cover; border-radius: 4px; border: 1px solid #e0dcd0; background: #e8e4d4; }
+    .field-image-preview .pick-btn { font-size: 11px; color: #5a7050; cursor: pointer; background: none; border: 1px solid #5a7050; border-radius: 4px; padding: 2px 8px; }
+    .field-image-preview .pick-btn:hover { background: #5a7050; color: #fff; }
+
+    /* ── Collapsible fieldsets ── */
+    .collapsible { border: 1px solid #e0dcd0; border-radius: 8px; margin-bottom: 16px; overflow: hidden; }
+    .collapsible-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; cursor: pointer; background: #faf9f4; border-bottom: 1px solid #e0dcd0; user-select: none; }
+    .collapsible-header h4 { font-size: 13px; font-weight: 600; }
+    .collapsible-header .chevron { transition: transform .2s; font-size: 12px; color: #8a8e80; }
+    .collapsible-header.collapsed .chevron { transform: rotate(-90deg); }
+    .collapsible-body { padding: 14px; }
+    .collapsible-body.hidden { display: none; }
+
+    /* ── Buttons ── */
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .12s; }
+    .btn-primary { background: #5a7050; color: #fff; }
+    .btn-primary:hover { background: #4a6040; }
+    .btn-secondary { background: #e8e4d4; color: #2a2e24; border: 1px solid #d0ccc0; }
+    .btn-secondary:hover { background: #d8d4c4; }
+    .btn-danger { background: #fff; color: #a04040; border: 1px solid #e0b0b0; }
+    .btn-danger:hover { background: #a04040; color: #fff; }
+    .btn-sm { padding: 4px 10px; font-size: 12px; }
+
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* ── Toast ── */
+    .toast { position: fixed; bottom: 24px; right: 24px; padding: 10px 20px; border-radius: 8px; color: #fff; font-size: 13px; font-weight: 500; opacity: 0; transform: translateY(10px); transition: all .25s; z-index: 200; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.success { background: #5a7050; }
+    .toast.error { background: #a04040; }
+
+    /* ── Image browser ── */
+    .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-top: 16px; }
+    .image-thumb { position: relative; border-radius: 6px; overflow: hidden; aspect-ratio: 1; border: 2px solid transparent; cursor: pointer; transition: border-color .12s; }
+    .image-thumb:hover { border-color: #5a7050; }
+    .image-thumb.selected { border-color: #5a7050; box-shadow: 0 0 0 2px rgba(90,112,80,.3); }
+    .image-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .image-thumb .name { position: absolute; bottom: 0; left: 0; right: 0; padding: 3px 6px; background: rgba(0,0,0,.65); color: #fff; font-size: 9px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .image-thumb .size { position: absolute; top: 3px; right: 3px; padding: 1px 5px; background: rgba(0,0,0,.5); color: #fff; font-size: 9px; border-radius: 3px; }
+    .upload-zone { border: 2px dashed #c0b8a4; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: all .15s; }
+    .upload-zone:hover, .upload-zone.drag-over { border-color: #5a7050; background: rgba(90,112,80,.04); }
+    .upload-zone input { display: none; }
+    .upload-zone p { font-size: 13px; color: #6b7060; }
+
+    /* ── Image picker modal ── */
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 100; display: none; align-items: center; justify-content: center; }
+    .modal-backdrop.open { display: flex; }
+    .modal { background: #fff; border-radius: 12px; width: 90vw; max-width: 700px; max-height: 80vh; overflow: hidden; display: flex; flex-direction: column; }
+    .modal-header { padding: 16px 20px; border-bottom: 1px solid #e0dcd0; display: flex; justify-content: space-between; align-items: center; }
+    .modal-header h3 { font-size: 16px; font-weight: 600; }
+    .modal-header button { background: none; border: none; font-size: 20px; cursor: pointer; color: #8a8e80; }
+    .modal-body { padding: 16px 20px; overflow-y: auto; flex: 1; }
+    .modal-footer { padding: 12px 20px; border-top: 1px solid #e0dcd0; display: flex; justify-content: flex-end; gap: 8px; }
+
+    /* ── Markdown toolbar ── */
+    .md-toolbar { display: flex; gap: 2px; padding: 6px 8px; background: #faf9f4; border: 1px solid #d0ccc0; border-bottom: none; border-radius: 6px 6px 0 0; flex-wrap: wrap; }
+    .md-toolbar button { background: none; border: 1px solid transparent; border-radius: 4px; padding: 4px 8px; font-size: 13px; cursor: pointer; color: #4a4e44; font-family: 'SF Mono', monospace; }
+    .md-toolbar button:hover { background: #e8e4d4; border-color: #d0ccc0; }
+    .md-toolbar .sep { width: 1px; background: #d0ccc0; margin: 2px 4px; }
+    .md-editor-wrap textarea { border-radius: 0 0 6px 6px; border-top: 1px solid #d0ccc0; }
+
+    /* ── Split editor + preview ── */
+    .split-pane { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid #d0ccc0; border-radius: 6px; overflow: hidden; min-height: 500px; }
+    .split-pane .pane { display: flex; flex-direction: column; }
+    .split-pane .pane-header { padding: 6px 12px; background: #faf9f4; border-bottom: 1px solid #e0dcd0; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: #8a8e80; }
+    .split-pane textarea { flex: 1; border: none; border-radius: 0; resize: none; padding: 12px; font-family: 'SF Mono', 'Monaco', 'Consolas', monospace; font-size: 13px; line-height: 1.6; }
+    .split-pane textarea:focus { box-shadow: none; }
+    .split-pane .preview { flex: 1; padding: 16px; overflow-y: auto; font-size: 15px; line-height: 1.7; border-left: 1px solid #e0dcd0; }
+    .split-pane .preview h2 { font-size: 22px; margin: 24px 0 8px; }
+    .split-pane .preview h3 { font-size: 18px; margin: 20px 0 6px; }
+    .split-pane .preview p { margin: 8px 0; }
+    .split-pane .preview img { max-width: 100%; border-radius: 6px; margin: 8px 0; }
+    .split-pane .preview a { color: #5a7050; }
+
+    /* ── New post form ── */
+    .new-post-form { background: #faf9f4; border: 1px solid #e0dcd0; border-radius: 8px; padding: 16px; margin-bottom: 20px; }
+    .new-post-form .form-row { display: flex; gap: 8px; align-items: end; flex-wrap: wrap; }
+    .new-post-form .form-row .field { flex: 1; min-width: 200px; margin-bottom: 0; }
+
+    /* ── Keyboard shortcut hint ── */
+    .kbd { display: inline-block; padding: 1px 5px; background: #e8e4d4; border: 1px solid #d0ccc0; border-radius: 3px; font-size: 11px; font-family: monospace; color: #6b7060; }
+
+    @media (max-width: 900px) {
+      .split-pane { grid-template-columns: 1fr; }
+      .split-pane .preview { border-left: none; border-top: 1px solid #e0dcd0; max-height: 300px; }
+    }
+    @media (max-width: 768px) {
+      .admin-shell { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; max-height: 50vh; }
+      .main-body { padding: 16px; }
+      .main-header { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h1>WYE CABINS</h1>
+        <span style="font-size:10px;color:#6a6e60;letter-spacing:.05em">ADMIN</span>
+      </div>
+      <div class="sidebar-body" id="sidebarNav"></div>
+      <div class="sidebar-footer">
+        <a href="index.html" target="_blank">View live site &rarr;</a>
+      </div>
+    </aside>
+    <div class="main">
+      <div class="main-header" id="mainHeader">
+        <div class="main-header-left">
+          <h2 id="headerTitle">Dashboard</h2>
+          <span class="file-path" id="headerPath"></span>
+        </div>
+        <div class="main-header-right">
+          <span class="save-hint" id="saveHint">Unsaved changes</span>
+          <span class="unsaved-dot" id="unsavedDot"></span>
+        </div>
+      </div>
+      <div class="main-body" id="editorPane">
+        <p style="color:#6b7060;margin-top:8px">Choose a content file from the sidebar to start editing.</p>
+        <div style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+          <div style="background:#fff;border:1px solid #e0dcd0;border-radius:8px;padding:16px">
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px">Keyboard shortcuts</div>
+            <div style="font-size:12px;color:#6b7060;line-height:1.8">
+              <span class="kbd">Ctrl+S</span> Save changes<br>
+              <span class="kbd">Ctrl+B</span> Bold (Markdown)<br>
+              <span class="kbd">Ctrl+I</span> Italic (Markdown)<br>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid #e0dcd0;border-radius:8px;padding:16px">
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px">Quick actions</div>
+            <div style="font-size:12px;color:#6b7060;line-height:1.8">
+              Click any file in the sidebar<br>
+              Edit fields or raw Markdown<br>
+              Changes save directly to disk
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <!-- Image Picker Modal -->
+  <div class="modal-backdrop" id="imagePickerModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Choose an image</h3>
+        <button id="imagePickerClose">&times;</button>
+      </div>
+      <div class="modal-body" id="imagePickerBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="imagePickerCancel">Cancel</button>
+        <button class="btn btn-primary" id="imagePickerSelect">Select</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var currentFile = null;
+    var dirty = false;
+    var imagePickerCallback = null;
+    var imagePickerSelected = null;
+    var allImages = [];
+    var sidebarNav = document.getElementById('sidebarNav');
+    var editorPane = document.getElementById('editorPane');
+    var toast = document.getElementById('toast');
+    var headerTitle = document.getElementById('headerTitle');
+    var headerPath = document.getElementById('headerPath');
+    var unsavedDot = document.getElementById('unsavedDot');
+    var saveHint = document.getElementById('saveHint');
+
+    // ── Utilities ──
+
+    function showToast(msg, type) {
+      toast.textContent = msg;
+      toast.className = 'toast show ' + (type || 'success');
+      clearTimeout(toast._t);
+      toast._t = setTimeout(function () { toast.className = 'toast'; }, 3000);
+    }
+
+    function api(route, opts) {
+      return fetch('/admin/api/' + route, opts).then(function (r) { return r.json(); });
+    }
+
+    function formatBytes(b) {
+      if (b < 1024) return b + ' B';
+      if (b < 1024 * 1024) return (b / 1024).toFixed(0) + ' KB';
+      return (b / (1024 * 1024)).toFixed(1) + ' MB';
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function setDirty(v) {
+      dirty = v;
+      unsavedDot.className = 'unsaved-dot' + (v ? ' show' : '');
+      saveHint.className = 'save-hint' + (v ? ' show' : '');
+    }
+
+    function isImagePath(key, val) {
+      if (typeof val !== 'string') return false;
+      var k = key.toLowerCase();
+      return k.indexOf('image') > -1 || k.indexOf('img') > -1 || k.indexOf('hero') > -1 ||
+        k.indexOf('cover') > -1 || k.indexOf('card') > -1 ||
+        /\.(jpg|jpeg|png|webp|svg|gif)$/i.test(val);
+    }
+
+    // ── Unsaved changes guard ──
+
+    window.addEventListener('beforeunload', function (e) {
+      if (dirty) { e.preventDefault(); e.returnValue = ''; }
+    });
+
+    // ── Ctrl+S global save ──
+
+    document.addEventListener('keydown', function (e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        var btn = document.getElementById('saveBtn') || document.getElementById('saveMdBtn');
+        if (btn) btn.click();
+      }
+    });
+
+    // ── Sidebar ──
+
+    function loadSidebar() {
+      api('list').then(function (data) {
+        var groups = {};
+        data.files.forEach(function (f) {
+          var parts = f.split('/');
+          var group = parts.length > 1 ? parts[0] : 'root';
+          if (!groups[group]) groups[group] = [];
+          groups[group].push(f);
+        });
+
+        var html = '';
+        var order = ['root', 'pages', 'units', 'blog'];
+        var labels = { root: 'Site Config', pages: 'Pages', units: 'Cabins', blog: 'Blog Posts' };
+        var icons = {
+          root: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>',
+          pages: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>',
+          units: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>',
+          blog: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>'
+        };
+
+        order.forEach(function (g) {
+          if (!groups[g]) return;
+          html += '<div class="sidebar-section"><h3>' + (labels[g] || g) + '</h3>';
+          groups[g].forEach(function (f) {
+            var name = f.split('/').pop().replace('.json', '').replace('.md', '');
+            var ext = f.split('.').pop();
+            var badge = ext === 'md' ? ' <span style="font-size:9px;opacity:.5;margin-left:auto">.md</span>' : '';
+            html += '<button data-file="' + f + '">' + (icons[g] || '') + name + badge + '</button>';
+          });
+          if (g === 'blog') {
+            html += '<button data-action="new-post" style="color:#5a7050;margin-top:4px">+ New Post</button>';
+          }
+          html += '</div>';
+        });
+
+        html += '<div class="sidebar-section"><h3>Media</h3>';
+        html += '<button data-action="images"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Images</button>';
+        html += '</div>';
+
+        sidebarNav.innerHTML = html;
+
+        sidebarNav.querySelectorAll('button[data-file]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            if (dirty && !confirm('You have unsaved changes. Discard them?')) return;
+            setDirty(false);
+            loadFile(btn.dataset.file);
+            setActiveBtn(btn);
+          });
+        });
+
+        var imgBtn = sidebarNav.querySelector('button[data-action="images"]');
+        if (imgBtn) imgBtn.addEventListener('click', function () {
+          if (dirty && !confirm('You have unsaved changes. Discard them?')) return;
+          setDirty(false);
+          loadImageBrowser();
+          setActiveBtn(this);
+        });
+
+        var newPostBtn = sidebarNav.querySelector('button[data-action="new-post"]');
+        if (newPostBtn) newPostBtn.addEventListener('click', function () {
+          if (dirty && !confirm('You have unsaved changes. Discard them?')) return;
+          setDirty(false);
+          showNewPostForm();
+          setActiveBtn(this);
+        });
+      });
+    }
+
+    function setActiveBtn(btn) {
+      sidebarNav.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+    }
+
+    // ── Load file ──
+
+    function loadFile(file) {
+      currentFile = file;
+      api('read?file=' + encodeURIComponent(file)).then(function (data) {
+        var ext = file.split('.').pop();
+        if (ext === 'json') {
+          renderJsonEditor(file, data.content);
+        } else if (ext === 'md') {
+          renderMarkdownEditor(file, data.content);
+        }
+      });
+    }
+
+    // ── JSON editor ──
+
+    function renderJsonEditor(file, raw) {
+      var obj = JSON.parse(raw);
+      var friendlyName = file.split('/').pop().replace('.json', '');
+
+      headerTitle.textContent = friendlyName;
+      headerPath.textContent = 'content/' + file;
+
+      var html = renderFields(obj, '');
+
+      html += '<div class="actions" style="margin-top:20px;padding-top:16px;border-top:1px solid #e0dcd0">'
+        + '<button class="btn btn-primary" id="saveBtn">Save Changes</button>'
+        + '<button class="btn btn-secondary" id="rawToggle">Raw JSON</button>'
+        + '</div>'
+        + '<div id="rawEditor" style="display:none;margin-top:16px">'
+        + '<div class="field"><label>Raw JSON</label>'
+        + '<textarea class="tall" id="rawJson">' + escapeHtml(JSON.stringify(obj, null, 2)) + '</textarea></div>'
+        + '<button class="btn btn-primary" id="saveRawBtn">Save Raw</button>'
+        + '</div>';
+
+      editorPane.innerHTML = html;
+      wireFieldListeners();
+
+      document.getElementById('saveBtn').addEventListener('click', function () {
+        var updated = collectFields(obj, '');
+        saveFile(file, JSON.stringify(updated, null, 2));
+      });
+
+      document.getElementById('rawToggle').addEventListener('click', function () {
+        var raw = document.getElementById('rawEditor');
+        var showing = raw.style.display === 'none';
+        raw.style.display = showing ? 'block' : 'none';
+        this.textContent = showing ? 'Form View' : 'Raw JSON';
+        if (showing) {
+          var updated = collectFields(obj, '');
+          document.getElementById('rawJson').value = JSON.stringify(updated, null, 2);
+        }
+      });
+
+      document.getElementById('saveRawBtn').addEventListener('click', function () {
+        saveFile(file, document.getElementById('rawJson').value);
+      });
+
+      // Wire image pickers
+      editorPane.querySelectorAll('.pick-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var input = btn.closest('.field').querySelector('input');
+          openImagePicker(function (path) {
+            input.value = path;
+            var img = btn.closest('.field').querySelector('.field-image-preview img');
+            if (img) img.src = encodeURI(path);
+            setDirty(true);
+          });
+        });
+      });
+    }
+
+    function renderFields(obj, prefix, depth) {
+      depth = depth || 0;
+      var html = '';
+      Object.keys(obj).forEach(function (key) {
+        var val = obj[key];
+        var id = prefix + key;
+        if (val === null || val === undefined) return;
+
+        if (typeof val === 'string') {
+          if (isImagePath(key, val)) {
+            html += '<div class="field"><label>' + key + '</label>'
+              + '<div class="field-image-wrap"><input type="text" data-key="' + id + '" value="' + escapeHtml(val) + '"></div>'
+              + '<div class="field-image-preview">'
+              + '<img src="' + encodeURI(val) + '" onerror="this.style.display=\'none\'">'
+              + '<button type="button" class="pick-btn">Choose</button>'
+              + '</div></div>';
+          } else if (val.length > 120) {
+            html += '<div class="field"><label>' + key + '</label><textarea data-key="' + id + '">' + escapeHtml(val) + '</textarea></div>';
+          } else {
+            html += '<div class="field"><label>' + key + '</label><input type="text" data-key="' + id + '" value="' + escapeHtml(val) + '"></div>';
+          }
+        } else if (typeof val === 'number') {
+          html += '<div class="field"><label>' + key + '</label><input type="number" data-key="' + id + '" value="' + val + '"></div>';
+        } else if (typeof val === 'boolean') {
+          html += '<div class="field"><label>' + key + '</label><select data-key="' + id + '"><option value="true"' + (val ? ' selected' : '') + '>Yes</option><option value="false"' + (!val ? ' selected' : '') + '>No</option></select></div>';
+        } else if (Array.isArray(val)) {
+          if (val.length > 0 && typeof val[0] === 'string') {
+            html += '<div class="field"><label>' + key + ' (one per line)</label><textarea data-key="' + id + '" data-type="string-array">' + escapeHtml(val.join('\n')) + '</textarea></div>';
+          } else if (val.length > 0 && typeof val[0] === 'object') {
+            html += '<div class="field"><label>' + key + '</label><textarea class="tall" data-key="' + id + '" data-type="json-array">' + escapeHtml(JSON.stringify(val, null, 2)) + '</textarea></div>';
+          }
+        } else if (typeof val === 'object') {
+          var collapsed = depth > 0 ? ' collapsed' : '';
+          html += '<div class="collapsible">'
+            + '<div class="collapsible-header' + collapsed + '" onclick="this.classList.toggle(\'collapsed\');this.nextElementSibling.classList.toggle(\'hidden\')">'
+            + '<h4>' + key + '</h4><span class="chevron">&#9660;</span></div>'
+            + '<div class="collapsible-body' + (depth > 0 ? ' hidden' : '') + '">'
+            + renderFields(val, id + '.', depth + 1)
+            + '</div></div>';
+        }
+      });
+      return html;
+    }
+
+    function collectFields(obj, prefix) {
+      var result = {};
+      Object.keys(obj).forEach(function (key) {
+        var val = obj[key];
+        var id = prefix + key;
+        var el = document.querySelector('[data-key="' + id + '"]');
+
+        if (typeof val === 'string' && el) {
+          result[key] = el.value;
+        } else if (typeof val === 'number' && el) {
+          result[key] = Number(el.value);
+        } else if (typeof val === 'boolean' && el) {
+          result[key] = el.value === 'true';
+        } else if (Array.isArray(val) && el) {
+          if (el.dataset.type === 'string-array') {
+            result[key] = el.value.split('\n').filter(function (s) { return s.trim(); });
+          } else if (el.dataset.type === 'json-array') {
+            try { result[key] = JSON.parse(el.value); } catch (e) { result[key] = val; }
+          } else { result[key] = val; }
+        } else if (typeof val === 'object' && val !== null && !Array.isArray(val)) {
+          result[key] = collectFields(val, id + '.');
+        } else { result[key] = val; }
+      });
+      return result;
+    }
+
+    function wireFieldListeners() {
+      editorPane.querySelectorAll('input, textarea, select').forEach(function (el) {
+        el.addEventListener('input', function () { setDirty(true); });
+      });
+    }
+
+    // ── Markdown editor with split preview ──
+
+    function renderMarkdownEditor(file, content) {
+      var name = file.split('/').pop().replace('.md', '');
+      headerTitle.textContent = name;
+      headerPath.textContent = 'content/' + file;
+
+      editorPane.innerHTML = ''
+        + '<div class="md-toolbar" id="mdToolbar">'
+        + '<button type="button" data-md="bold" title="Bold (Ctrl+B)"><b>B</b></button>'
+        + '<button type="button" data-md="italic" title="Italic (Ctrl+I)"><i>I</i></button>'
+        + '<div class="sep"></div>'
+        + '<button type="button" data-md="h2" title="Heading 2">H2</button>'
+        + '<button type="button" data-md="h3" title="Heading 3">H3</button>'
+        + '<div class="sep"></div>'
+        + '<button type="button" data-md="link" title="Insert link">Link</button>'
+        + '<button type="button" data-md="image" title="Insert image">Image</button>'
+        + '<button type="button" data-md="map" title="Map shortcode">Map</button>'
+        + '</div>'
+        + '<div class="split-pane">'
+        + '<div class="pane"><div class="pane-header">Markdown</div>'
+        + '<textarea id="mdContent">' + escapeHtml(content) + '</textarea></div>'
+        + '<div class="pane"><div class="pane-header">Preview</div>'
+        + '<div class="preview" id="mdPreview"></div></div>'
+        + '</div>'
+        + '<div class="actions" style="margin-top:16px">'
+        + '<button class="btn btn-primary" id="saveMdBtn">Save Changes</button>'
+        + '</div>';
+
+      var ta = document.getElementById('mdContent');
+      var preview = document.getElementById('mdPreview');
+
+      function updatePreview() {
+        if (typeof marked !== 'undefined') {
+          marked.setOptions({ breaks: false, headerIds: false });
+          var html = marked.parse(ta.value.replace(/\{\{map:"([^"]+)"\}\}/g, '<span style="color:#5a7050">[Map: $1]</span>'));
+          preview.innerHTML = html;
+        }
+      }
+      updatePreview();
+
+      ta.addEventListener('input', function () {
+        setDirty(true);
+        updatePreview();
+      });
+
+      // Toolbar actions
+      document.getElementById('mdToolbar').addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-md]');
+        if (!btn) return;
+        var action = btn.dataset.md;
+        var start = ta.selectionStart;
+        var end = ta.selectionEnd;
+        var text = ta.value;
+        var sel = text.substring(start, end);
+
+        var insert = '';
+        if (action === 'bold') insert = '**' + (sel || 'bold text') + '**';
+        else if (action === 'italic') insert = '*' + (sel || 'italic text') + '*';
+        else if (action === 'h2') insert = '\n## ' + (sel || 'Heading');
+        else if (action === 'h3') insert = '\n### ' + (sel || 'Heading');
+        else if (action === 'link') insert = '[' + (sel || 'link text') + '](https://)';
+        else if (action === 'map') { var place = sel || prompt('Place name:'); if (place) insert = '{{map:"' + place + '"}}'; }
+        else if (action === 'image') {
+          openImagePicker(function (path) {
+            var tag = '\n<img class="blog-photo" src="' + path + '" alt="" loading="lazy">\n';
+            ta.setRangeText(tag, start, end, 'end');
+            setDirty(true);
+            updatePreview();
+          });
+          return;
+        }
+
+        if (insert) {
+          ta.setRangeText(insert, start, end, 'end');
+          setDirty(true);
+          updatePreview();
+          ta.focus();
+        }
+      });
+
+      // Ctrl+B / Ctrl+I in textarea
+      ta.addEventListener('keydown', function (e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+          e.preventDefault();
+          document.querySelector('[data-md="bold"]').click();
+        }
+        if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
+          e.preventDefault();
+          document.querySelector('[data-md="italic"]').click();
+        }
+      });
+
+      document.getElementById('saveMdBtn').addEventListener('click', function () {
+        saveFile(file, ta.value);
+      });
+    }
+
+    // ── New blog post ──
+
+    function showNewPostForm() {
+      headerTitle.textContent = 'New Blog Post';
+      headerPath.textContent = '';
+
+      editorPane.innerHTML = ''
+        + '<div class="new-post-form">'
+        + '<p style="margin-bottom:12px;font-size:13px;color:#6b7060">Create a new blog post. This will create a Markdown file and add an entry to meta.json.</p>'
+        + '<div class="form-row">'
+        + '<div class="field"><label>Title</label><input type="text" id="newPostTitle" placeholder="e.g. Weekend in the Brecon Beacons"></div>'
+        + '<div class="field"><label>Slug</label><input type="text" id="newPostSlug" placeholder="auto-generated" style="color:#8a8e80"></div>'
+        + '</div>'
+        + '<div class="field"><label>Excerpt</label><textarea id="newPostExcerpt" style="min-height:60px" placeholder="A short summary for the blog listing card"></textarea></div>'
+        + '<div class="actions" style="margin-top:12px"><button class="btn btn-primary" id="createPostBtn">Create Post</button></div>'
+        + '</div>';
+
+      var titleInput = document.getElementById('newPostTitle');
+      var slugInput = document.getElementById('newPostSlug');
+
+      titleInput.addEventListener('input', function () {
+        slugInput.value = titleInput.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      });
+
+      document.getElementById('createPostBtn').addEventListener('click', function () {
+        var title = titleInput.value.trim();
+        var slug = slugInput.value.trim();
+        var excerpt = document.getElementById('newPostExcerpt').value.trim();
+        if (!title || !slug) { showToast('Title and slug required', 'error'); return; }
+
+        // Create the .md file
+        var mdContent = '## ' + title + '\n\nStart writing your post here.\n';
+        api('save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ file: 'blog/' + slug + '.md', content: mdContent })
+        }).then(function () {
+          // Update meta.json
+          return api('read?file=blog/meta.json');
+        }).then(function (data) {
+          var meta = JSON.parse(data.content);
+          meta.posts.push({
+            slug: slug,
+            title: title,
+            heroImage: 'assets/images/Holly/Holly Cover.webp',
+            heroAlt: title,
+            cardImage: 'assets/images/Holly/Holly Cover.webp',
+            cardAlt: title,
+            cardWidth: 1500,
+            cardHeight: 1000,
+            excerpt: excerpt || title,
+            metaDescription: excerpt || title
+          });
+          return api('save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ file: 'blog/meta.json', content: JSON.stringify(meta, null, 2) })
+          });
+        }).then(function () {
+          showToast('Created ' + slug + '.md', 'success');
+          loadSidebar();
+          setTimeout(function () { loadFile('blog/' + slug + '.md'); }, 300);
+        }).catch(function (err) {
+          showToast('Error: ' + err.message, 'error');
+        });
+      });
+    }
+
+    // ── Image browser ──
+
+    function loadImageBrowser() {
+      headerTitle.textContent = 'Images';
+      headerPath.textContent = 'assets/images/';
+
+      api('images').then(function (data) {
+        allImages = data.images;
+        var html = '<div class="upload-zone" id="uploadZone">'
+          + '<input type="file" id="uploadInput" accept="image/*" multiple>'
+          + '<p>Drop images here or click to upload</p>'
+          + '</div>';
+
+        html += '<p style="font-size:12px;color:#8a8e80;margin-top:12px">' + data.images.length + ' images</p>';
+        html += '<div class="image-grid">';
+        data.images.forEach(function (img) {
+          var name = img.path.split('/').pop();
+          html += '<div class="image-thumb" data-path="' + escapeHtml(img.path) + '" title="' + escapeHtml(img.path) + '">'
+            + '<img src="' + encodeURI(img.path) + '" loading="lazy" alt="">'
+            + '<span class="name">' + escapeHtml(name) + '</span>'
+            + '<span class="size">' + formatBytes(img.size) + '</span>'
+            + '</div>';
+        });
+        html += '</div>';
+
+        editorPane.innerHTML = html;
+
+        var zone = document.getElementById('uploadZone');
+        var input = document.getElementById('uploadInput');
+        zone.addEventListener('click', function () { input.click(); });
+        zone.addEventListener('dragover', function (e) { e.preventDefault(); zone.classList.add('drag-over'); });
+        zone.addEventListener('dragleave', function () { zone.classList.remove('drag-over'); });
+        zone.addEventListener('drop', function (e) {
+          e.preventDefault(); zone.classList.remove('drag-over');
+          uploadFiles(e.dataTransfer.files);
+        });
+        input.addEventListener('change', function () { uploadFiles(input.files); });
+
+        // Click to copy path
+        editorPane.querySelectorAll('.image-thumb').forEach(function (thumb) {
+          thumb.addEventListener('click', function () {
+            var path = thumb.dataset.path;
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(path).then(function () {
+                showToast('Copied: ' + path);
+              });
+            }
+          });
+        });
+      });
+    }
+
+    function uploadFiles(files) {
+      var promises = [];
+      for (var i = 0; i < files.length; i++) {
+        (function (file) {
+          var formData = new FormData();
+          formData.append('file', file);
+          formData.append('dest', 'assets/images/' + file.name);
+          promises.push(fetch('/admin/api/upload-image', { method: 'POST', body: formData }).then(function (r) { return r.json(); }));
+        })(files[i]);
+      }
+      Promise.all(promises).then(function (results) {
+        var ok = results.filter(function (r) { return r.ok; }).length;
+        showToast(ok + ' image(s) uploaded');
+        loadImageBrowser();
+      }).catch(function () { showToast('Upload failed', 'error'); });
+    }
+
+    // ── Image Picker Modal ──
+
+    function openImagePicker(callback) {
+      imagePickerCallback = callback;
+      imagePickerSelected = null;
+      var modal = document.getElementById('imagePickerModal');
+      var body = document.getElementById('imagePickerBody');
+
+      api('images').then(function (data) {
+        var html = '<div class="image-grid">';
+        data.images.forEach(function (img) {
+          var name = img.path.split('/').pop();
+          html += '<div class="image-thumb" data-path="' + escapeHtml(img.path) + '">'
+            + '<img src="' + encodeURI(img.path) + '" loading="lazy" alt="">'
+            + '<span class="name">' + escapeHtml(name) + '</span>'
+            + '</div>';
+        });
+        html += '</div>';
+        body.innerHTML = html;
+        modal.classList.add('open');
+
+        body.querySelectorAll('.image-thumb').forEach(function (thumb) {
+          thumb.addEventListener('click', function () {
+            body.querySelectorAll('.image-thumb').forEach(function (t) { t.classList.remove('selected'); });
+            thumb.classList.add('selected');
+            imagePickerSelected = thumb.dataset.path;
+          });
+        });
+      });
+    }
+
+    document.getElementById('imagePickerSelect').addEventListener('click', function () {
+      if (imagePickerSelected && imagePickerCallback) {
+        imagePickerCallback(imagePickerSelected);
+      }
+      document.getElementById('imagePickerModal').classList.remove('open');
+    });
+
+    document.getElementById('imagePickerCancel').addEventListener('click', function () {
+      document.getElementById('imagePickerModal').classList.remove('open');
+    });
+
+    document.getElementById('imagePickerClose').addEventListener('click', function () {
+      document.getElementById('imagePickerModal').classList.remove('open');
+    });
+
+    document.getElementById('imagePickerModal').addEventListener('click', function (e) {
+      if (e.target === this) this.classList.remove('open');
+    });
+
+    // ── Save ──
+
+    function saveFile(file, content) {
+      api('save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ file: file, content: content })
+      }).then(function (data) {
+        if (data.ok) {
+          showToast('Saved');
+          setDirty(false);
+        } else {
+          showToast('Error: ' + (data.error || 'Unknown'), 'error');
+        }
+      }).catch(function (err) {
+        showToast('Save failed: ' + err.message, 'error');
+      });
+    }
+
+    loadSidebar();
+  })();
+  </script>
+</body>
+</html>

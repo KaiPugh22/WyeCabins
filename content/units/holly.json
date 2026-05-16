@@ -28,5 +28,13 @@
     { "icon": "shower", "label": "Hot Water Shower" },
     { "icon": "nature", "label": "Woodland & Stream" }
   ],
-  "mapQuery": "Felindre, Brecon, Powys"
+  "mapQuery": "Felindre, Brecon, Powys",
+  "schema": {
+    "name": "Holly Cabin — Wye Cabins",
+    "description": "A hand-built woodland cabin overlooking the brook, with king bed, wood burner, private kitchen hut and fire pit. Off-grid glamping in the Brecon Beacons near Hay-on-Wye.",
+    "occupancy": 2,
+    "numberOfRooms": 1,
+    "amenityFeature": ["Wood Burner", "Fire Pit", "Private Kitchen Hut", "Solar Power", "Hot Water Shower"],
+    "petsAllowed": false
+  }
 }

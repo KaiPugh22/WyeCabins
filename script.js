@@ -69,6 +69,16 @@
     el.innerHTML = '<p class="slot-error" style="padding:16px;color:#6b7060;font-style:italic">Content failed to load &mdash; please refresh.</p>';
   }
 
+  function injectJsonLd(obj) {
+    var existing = document.getElementById('dynamic-jsonld');
+    if (existing) existing.remove();
+    var el = document.createElement('script');
+    el.type = 'application/ld+json';
+    el.id = 'dynamic-jsonld';
+    el.textContent = JSON.stringify(obj);
+    document.head.appendChild(el);
+  }
+
   function toAssetUrl(path) {
     return encodeURI(path);
   }
@@ -162,7 +172,21 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      // TODO: Connect to your form handler (Formspree, Netlify Forms, etc.)
+      var name = form.querySelector('#contact-name').value.trim();
+      var email = form.querySelector('#contact-email').value.trim();
+      var message = form.querySelector('#contact-message').value.trim();
+
+      if (!name || !email || !message) return;
+
+      // Open the user's email client with the message pre-filled
+      var subject = 'Enquiry from ' + name + ' via Wye Cabins website';
+      var body = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + message;
+      var mailtoUrl = 'mailto:' + SITE.contact.email
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+
+      window.location.href = mailtoUrl;
+
       if (feedback) {
         feedback.textContent = SITE.contactSection.successMessage;
       }
@@ -209,6 +233,16 @@
 
     nav.addEventListener('click', function (e) {
       if (e.target.tagName === 'A') {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.classList.remove('nav-toggle--open');
+        nav.classList.remove('nav-open');
+      }
+    });
+
+    // Close mobile nav when clicking outside
+    document.addEventListener('click', function (e) {
+      if (!nav.classList.contains('nav-open')) return;
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
         toggle.setAttribute('aria-expanded', 'false');
         toggle.classList.remove('nav-toggle--open');
         nav.classList.remove('nav-open');
@@ -473,6 +507,26 @@
       bookBtn.rel = 'noreferrer';
     }
 
+    // Inject per-cabin Lodging JSON-LD
+    if (unit.schema) {
+      injectJsonLd({
+        '@context': 'https://schema.org',
+        '@type': 'LodgingBusiness',
+        'name': unit.schema.name,
+        'description': unit.schema.description,
+        'image': window.location.origin + '/' + toAssetUrl(unit.heroImage),
+        'url': 'https://wyecabins.co.uk/stay.html?unit=' + unit.slug,
+        'numberOfRooms': unit.schema.numberOfRooms,
+        'occupancy': { '@type': 'QuantitativeValue', 'value': unit.schema.occupancy },
+        'amenityFeature': unit.schema.amenityFeature.map(function (a) {
+          return { '@type': 'LocationFeatureSpecification', 'name': a, 'value': true };
+        }),
+        'petsAllowed': unit.schema.petsAllowed,
+        'address': { '@type': 'PostalAddress', 'addressLocality': unit.mapQuery.split(',')[0].trim(), 'addressCountry': 'GB' },
+        'containedInPlace': { '@type': 'LodgingBusiness', 'name': 'Wye Cabins', 'url': 'https://wyecabins.co.uk' }
+      });
+    }
+
     renderInstagramEmbed();
     setupLightbox();
   }
@@ -680,6 +734,27 @@
       body.querySelectorAll('a[href^="http"]').forEach(function (a) {
         a.target = '_blank';
         a.rel = 'noreferrer';
+      });
+
+      // Append booking CTA after blog body
+      if (SITE) {
+        var cta = document.createElement('div');
+        cta.className = 'blog-cta-box';
+        cta.innerHTML = '<p>Ready to visit?</p>'
+          + '<a class="outline-btn" href="' + SITE.contact.bookingUrl + '" target="_blank" rel="noreferrer">BOOK YOUR STAY</a>';
+        body.appendChild(cta);
+      }
+
+      // Inject BlogPosting JSON-LD
+      injectJsonLd({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        'headline': post.title,
+        'description': post.metaDescription || post.excerpt,
+        'image': window.location.origin + '/' + toAssetUrl(post.heroImage),
+        'url': 'https://wyecabins.co.uk/blog.html?post=' + post.slug,
+        'author': { '@type': 'Organization', 'name': 'Wye Cabins', 'url': 'https://wyecabins.co.uk' },
+        'publisher': { '@type': 'Organization', 'name': 'Wye Cabins', 'url': 'https://wyecabins.co.uk' }
       });
     });
   }
