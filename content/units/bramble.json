@@ -19,7 +19,7 @@
     "assets/images/Bramble/View-from-Bramble-cabin-at-Wye-Glamping-family-holidays-in-Wales (1).jpg"
   ],
   "specs": [
-    { "icon": "sleeps", "label": "Sleeps 2 (Cot Available)" },
+    { "icon": "sleeps", "label": "Sleeps 2 Adults + 2 Infants" },
     { "icon": "bed", "label": "King Bed" },
     { "icon": "flame", "label": "Wood Burner" },
     { "icon": "solar", "label": "Off-Grid & Solar" },

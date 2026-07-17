@@ -19,7 +19,7 @@
     "assets/images/Holly/The-day-bed-in-Holly-cabin-at-Wye-Glamping-in-Wales.webp"
   ],
   "specs": [
-    { "icon": "sleeps", "label": "Sleeps 2 + Infant" },
+    { "icon": "sleeps", "label": "Sleeps 2 Adults + 2 Infants" },
     { "icon": "bed", "label": "King Bed & Day Bed" },
     { "icon": "flame", "label": "Wood Burner" },
     { "icon": "solar", "label": "Off-Grid & Solar" },

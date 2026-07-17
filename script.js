@@ -292,7 +292,7 @@
 
   function renderStayCard(card) {
     return '<a class="stay-card' + (card.className ? ' ' + card.className : '') + '" href="' + (card.href || ('stay.html?unit=' + card.unit)) + '"' + (card.target ? ' target="' + card.target + '" rel="noreferrer"' : '') + '>'
-      + '<img src="' + toAssetUrl(card.image) + '" alt="' + escapeHtml(card.alt) + '" width="' + card.width + '" height="' + card.height + '"' + (card.eager ? '' : ' loading="lazy"') + '>'
+      + '<img src="' + toAssetUrl(card.image) + '" alt="' + escapeHtml(card.alt) + '" width="' + card.width + '" height="' + card.height + '" decoding="async"' + (card.eager ? ' fetchpriority="high"' : ' loading="lazy"') + '>'
       + '<div class="stay-overlay">'
       + '<h2>' + escapeHtml(card.title) + '</h2>'
       + '<p>' + escapeHtml(card.tagline) + '</p>'
@@ -471,6 +471,7 @@
       var image = document.createElement('img');
       image.src = toAssetUrl(imageSrc);
       image.alt = unit.title + ' gallery image ' + (index + 1);
+      image.decoding = 'async';
       if (index >= 3) image.loading = 'lazy';
       button.appendChild(image);
       gallery.appendChild(button);
@@ -561,6 +562,7 @@
             var img = document.createElement('img');
             img.src = imgUrl;
             img.alt = '';
+            img.decoding = 'async';
             img.loading = i > 3 ? 'lazy' : 'eager';
             slide.appendChild(img);
             track.appendChild(slide);
@@ -688,7 +690,7 @@
       var url = 'blog.html?post=' + post.slug;
       return '<article class="post-card">'
         + '<a class="post-card-thumb" href="' + url + '">'
-        + '<img src="' + toAssetUrl(post.cardImage) + '" alt="' + escapeHtml(post.cardAlt) + '" width="' + post.cardWidth + '" height="' + post.cardHeight + '"' + (meta.posts.indexOf(post) === 0 ? '' : ' loading="lazy"') + '>'
+        + '<img src="' + toAssetUrl(post.cardImage) + '" alt="' + escapeHtml(post.cardAlt) + '" width="' + post.cardWidth + '" height="' + post.cardHeight + '" decoding="async"' + (meta.posts.indexOf(post) === 0 ? '' : ' loading="lazy"') + '>'
         + '</a>'
         + '<div class="post-card-body">'
         + '<h2>' + escapeHtml(post.title) + '</h2>'
